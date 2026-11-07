@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Progression Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+
+        <!-- Top Navigation Bar (Tabs + Theme Toggle) -->
+        <div class="top-nav">
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="predictor">Predictor</button>
+                <button class="tab-btn" data-tab="guide">Variable guide</button>
+            </nav>
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme" title="Toggle Light/Dark Mode">
+                <!-- Moon icon (shows in light mode) -->
+                <svg class="theme-icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <!-- Sun icon (shows in dark mode) -->
+                <svg class="theme-icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- ========== PREDICTOR PANEL ========== -->
+        <section id="panel-predictor" class="tab-panel active">
+
+            <!-- Page heading -->
+            <div class="page-heading">
+                <div class="page-heading-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                         fill="none" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="page-title">Diabetes Progression Predictor</h1>
+                    <p class="page-subtitle">Enter the physiological features below to predict the progression score of the disease.</p>
+                </div>
+            </div>
+
+            <!-- Info banner -->
+            <div class="info-banner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                     fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="info-banner-icon">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>Values should be normalized (standardized) as per the dataset requirements.</span>
+            </div>
+
+            <!-- Main form card -->
+            <div class="form-card">
+                <form id="prediction-form">
+
+                    <!-- Section 01 – Patient characteristics -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-num">01</span>
+                            <span class="section-label">Patient characteristics</span>
+                        </div>
+                        <div class="fields-grid cols-4">
+                            <div class="field">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" step="any" value="0.05" required>
+                            </div>
+                            <div class="field">
+                                <label for="sex">Sex</label>
+                                <input type="number" id="sex" name="sex" step="any" value="0.05" required>
+                            </div>
+                            <div class="field">
+                                <label for="bmi">BMI</label>
+                                <input type="number" id="bmi" name="bmi" step="any" value="0.06" required>
+                            </div>
+                            <div class="field">
+                                <label for="bp">BP (Blood Pressure)</label>
+                                <input type="number" id="bp" name="bp" step="any" value="0.02" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section divider -->
+                    <div class="section-divider"></div>
+
+                    <!-- Section 02 – Serum measurements -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-num">02</span>
+                            <span class="section-label">Serum measurements</span>
+                        </div>
+                        <div class="fields-grid cols-3">
+                            <div class="field">
+                                <label for="s1">S1 (Serum 1)</label>
+                                <input type="number" id="s1" name="s1" step="any" value="-0.04" required>
+                            </div>
+                            <div class="field">
+                                <label for="s2">S2 (Serum 2)</label>
+                                <input type="number" id="s2" name="s2" step="any" value="-0.04" required>
+                            </div>
+                            <div class="field">
+                                <label for="s3">S3 (Serum 3)</label>
+                                <input type="number" id="s3" name="s3" step="any" value="-0.02" required>
+                            </div>
+                        </div>
+                        <div class="fields-grid cols-3">
+                            <div class="field">
+                                <label for="s4">S4 (Serum 4)</label>
+                                <input type="number" id="s4" name="s4" step="any" value="-0.01" required>
+                            </div>
+                            <div class="field">
+                                <label for="s5">S5 (Serum 5)</label>
+                                <input type="number" id="s5" name="s5" step="any" value="0.01" required>
+                            </div>
+                            <div class="field">
+                                <label for="s6">S6 (Serum 6)</label>
+                                <input type="number" id="s6" name="s6" step="any" value="0.02" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form footer -->
+                    <div class="form-footer">
+                        <span class="input-count">10 standardized numerical inputs</span>
+                        <button type="submit" class="btn-predict">
+                            Predict Progression Score
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Progression Score Reference Scale -->
+            <div class="scale-card">
+                <div class="scale-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                         fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                    <span class="scale-title">Progression Score Reference</span>
+                </div>
+
+                <!-- Gradient bar + marker -->
+                <div class="scale-bar-wrapper">
+                    <div class="scale-bar">
+                        <div id="score-marker" class="score-marker hidden">
+                            <div class="score-marker-pin"></div>
+                            <div class="score-marker-label" id="score-marker-label"></div>
+                        </div>
+                    </div>
+                    <!-- tick labels -->
+                    <div class="scale-ticks">
+                        <span>25</span>
+                        <span>100</span>
+                        <span>150</span>
+                        <span>346</span>
+                    </div>
+                </div>
+
+                <!-- Zone legend -->
+                <div class="scale-zones">
+                    <div class="scale-zone zone-low">
+                        <div class="zone-dot dot-low"></div>
+                        <div>
+                            <div class="zone-label">Below Average</div>
+                            <div class="zone-range">Score &lt; 100</div>
+                            <div class="zone-desc">Relatively lower disease progression observed in the dataset population.</div>
+                        </div>
+                    </div>
+                    <div class="scale-zone zone-mid">
+                        <div class="zone-dot dot-mid"></div>
+                        <div>
+                            <div class="zone-label">Average</div>
+                            <div class="zone-range">Score 100 – 150</div>
+                            <div class="zone-desc">Moderate progression aligned with the dataset mean (~152).</div>
+                        </div>
+                    </div>
+                    <div class="scale-zone zone-high">
+                        <div class="zone-dot dot-high"></div>
+                        <div>
+                            <div class="zone-label">Above Average</div>
+                            <div class="zone-range">Score &gt; 150</div>
+                            <div class="zone-desc">Higher progression; more pronounced markers relative to the dataset population.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="scale-disclaimer">
+                    ⚠ This scale is based on the scikit-learn diabetes dataset (n = 442). Scores reflect statistical
+                    patterns in that dataset — not a clinical diagnosis or individual medical assessment.
+                </p>
+            </div>
+
+            <!-- Result -->
+            <div id="result-container" class="result-container hidden">
+                <div class="result-card">
+                    <h2>Prediction Result</h2>
+                    <div class="score-display">
+                        <span class="score-label">Predicted Score:</span>
+                        <span id="score-value" class="score-value">--</span>
+                    </div>
+                    <div class="interpretation">
+                        <span class="interpretation-label">Interpretation:</span>
+                        <span id="interpretation-value" class="interpretation-value">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error -->
+            <div id="error-container" class="error-container hidden">
+                <div class="error-card">
+                    <h3>Error</h3>
+                    <p id="error-message"></p>
+                    <button type="button" class="btn-dismiss">Dismiss</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ========== VARIABLE GUIDE PANEL ========== -->
+        <section id="panel-guide" class="tab-panel hidden">
+            <div class="page-heading">
+                <div class="page-heading-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                         fill="none" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="page-title">Diabetes Progression Predictor</h1>
+                    <p class="page-subtitle">Understand the ten physiological inputs and how they can inform a progression prediction.</p>
+                </div>
+            </div>
+
+            <div class="form-card guide-card">
+                <div class="guide-disclaimer">
+                    These definitions explain what each input represents and its potential predictive context.
+                    They do not describe a model-specific weight, a causal effect, or an individual medical assessment.
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="guide-section">
+                    <h3>What is being predicted?</h3>
+                    <p>The Scikit-learn Diabetes reference dataset describes 442 people with diabetes, ten baseline inputs,
+                       and a quantitative measure of disease progression one year after baseline. These variable names match
+                       that dataset, but this does not confirm which dataset or model this application uses.</p>
+                    <div class="note-box">
+                        <p>A progression score is not the probability of developing diabetes.</p>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="guide-section">
+                    <h3>01 · Reading standardized values</h3>
+                    <div class="two-column">
+                        <div>
+                            <h4>Scaled inputs, not raw readings</h4>
+                            <p>Fields expect the same preprocessing as during training, not raw lab values.</p>
+                        </div>
+                        <div>
+                            <h4>The scikit-learn reference scaling</h4>
+                            <p>Columns are mean-centered and divided by the standard deviation, making every column zero-mean and unit-variance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="guide-section">
+                    <h3>02 · Patient characteristics</h3>
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>What it means</th>
+                                <th>Potential predictive context</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>age</code></td><td>Age at baseline, before the follow-up period.</td><td>Adds demographic context. Does not determine progression on its own.</td></tr>
+                            <tr><td><code>sex</code></td><td>Dataset-coded sex. Use the encoding specified by the training dataset.</td><td>May capture group-level patterns. Do not infer causality.</td></tr>
+                            <tr><td><code>bmi</code></td><td>Weight relative to height, measured in kg/m² before scaling.</td><td>A proxy for body size and adiposity that adds metabolic context.</td></tr>
+                            <tr><td><code>bp</code></td><td>Average blood pressure at baseline.</td><td>Adds cardiovascular context alongside body size and serum measurements.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="guide-section">
+                    <h3>03 · Serum measurements</h3>
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>What it means</th>
+                                <th>Potential predictive context</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>s1</code> · TC</td><td>A measure of total cholesterol found in the blood.</td><td>Provides overall lipid context.</td></tr>
+                            <tr><td><code>s2</code> · LDL</td><td>Lipoproteins that carry cholesterol, often referred to as "bad" cholesterol.</td><td>Adds atherogenic lipid context.</td></tr>
+                            <tr><td><code>s3</code> · HDL</td><td>Lipoproteins involved in cholesterol transport, often referred to as "good" cholesterol.</td><td>Adds complementary lipid context.</td></tr>
+                            <tr><td><code>s4</code> · TCH</td><td>A calculated ratio comparing total cholesterol to high-density lipoproteins.</td><td>Summarizes the balance between total cholesterol and HDL.</td></tr>
+                            <tr><td><code>s5</code> · LTG</td><td>Likely the natural logarithm of serum triglycerides levels.</td><td>Adds metabolic and lipid context.</td></tr>
+                            <tr><td><code>s6</code> · GLU</td><td>A measure of serum glucose levels.</td><td>Adds glycemic context to the joint prediction.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="guide-section">
+                    <h3>04 · How the variables work together</h3>
+                    <p>A trained regression model learns joint statistical relationships between the baseline inputs and the
+                       progression target. It uses the combined pattern of demographic, body size, cardiovascular, lipid,
+                       and glycemic information to estimate a score—not ten independent medical judgments.</p>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="guide-section">
+                    <h3>05 · What makes a prediction plausible?</h3>
+                    <div class="three-column">
+                        <div class="plausibility-card">
+                            <h4>Match the training inputs</h4>
+                            <p>Use the same preprocessing, variable order, and sex encoding as training.</p>
+                        </div>
+                        <div class="plausibility-card">
+                            <h4>Stay within represented data</h4>
+                            <p>Use valid, internally consistent inputs within the population and ranges represented in training.</p>
+                        </div>
+                        <div class="plausibility-card">
+                            <h4>Evaluate the fitted model</h4>
+                            <p>Assess performance on held-out data, not the training data alone.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="educational-note">
+                    <h4>Educational reference, not medical advice</h4>
+                    <p>A progression prediction is not a diagnosis, a probability of developing diabetes, or treatment advice.
+                       This guide is not patient-specific medical advice and does not replace assessment by a qualified clinician.</p>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="reference-section">
+                    <h4>Reference dataset documentation</h4>
+                    <p><code>scikit-learn : Diabetes dataset</code>. Describes the reference variables, scaling, and one-year
+                       progression target.</p>
+                    <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html"
+                       target="_blank" rel="noopener" class="doc-link">
+                       https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /.app-wrapper -->
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.schema import PatientData
 import pickle
@@ -10,6 +11,14 @@ app = FastAPI(
     title="Diabetes Progression Predictor",
     description="Predicts Diabetes Progression Score from Physiological Features",
     version="1.0.0"
+)
+
+# Allow requests from the HTML frontend served on any localhost port
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Load the trained model
@@ -56,7 +65,6 @@ def get_interpretation(score):
     else:
         return "Above average progression"
     
-@app.get("/")
+@app.get("/health")
 def health_check():
     return {"status": "healthy", "model": "diabetes_progression_v1"}
-
