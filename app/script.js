@@ -1,4 +1,4 @@
-const API_BASE_URL = window.location.origin.includes(':8000') ? window.location.origin : 'http://127.0.0.1:8000';
+const API_BASE_URL = window.location.origin.includes(':3000') ? 'http://127.0.0.1:8000' : window.location.origin;
 const PREDICT_ENDPOINT = `${API_BASE_URL}/predict`;
 
 const FIELD_NAMES = [
