@@ -6,6 +6,8 @@ from app.schema import PatientData
 import pickle
 import numpy as np
 import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI(
     title="Diabetes Progression Predictor",
@@ -30,7 +32,14 @@ with open(model_path, "rb") as f:
 
 @app.get("/")
 def homepage():
-    return{"Welcome to the Homepage!"}
+    index_path = os.path.join("app", "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"Welcome to the Homepage!"}
+
+# Mount static assets (style.css, script.js)
+if os.path.exists("app"):
+    app.mount("/static", StaticFiles(directory="app"), name="static")
 
 
 @app.post("/predict")

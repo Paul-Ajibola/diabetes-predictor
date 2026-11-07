@@ -1,0 +1,36 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Git and OS metadata
+.git/
+.gitignore
+.dockerignore
+.DS_Store
+Thumbs.db
+
+# IDE configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker / deployment logs
+*.log
+docker-compose*.override.yml
+
+# Temporary docs or notes
+*.tmp

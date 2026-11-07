@@ -1,0 +1,11 @@
+services:
+  diabetes-predictor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: diabetes-predictor-app
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
